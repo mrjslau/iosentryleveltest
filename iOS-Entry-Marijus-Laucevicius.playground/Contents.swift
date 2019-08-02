@@ -1,5 +1,6 @@
 // Marijus Laucevicius iOS Entry Level Test 2019.08.02
 import Cocoa
+import Foundation
 
 
 
@@ -144,11 +145,84 @@ let shopThree = Shop(name: "Rimi", adress: "Ukmergės g. 10", workSchedule: Shop
     sunday: nil))
 
 // RUN THE APP
-print("\n ------------  MAIN ASSIGNMENT ------------ \n")
+print("------------  MAIN ASSIGNMENT ------------")
 printSchedule(shop: shopOne)
 printSchedule(shop: shopTwo)
 printSchedule(shop: shopThree)
-print("\n ------------------------------------------ \n")
+print("------------------------------------------")
 
 // ----------------  MAIN ASSIGNMENT  ----------------
 // ---------------------------------------------------
+
+
+// ----------------------   2.  ----------------------
+extension Collection where Element: StringProtocol {
+    func longestCommonPrefix() -> String {
+        guard let first = self.first.map({ String($0) }) else { return "" }
+        return dropFirst().reduce(first, { $0.commonPrefix(with: $1) })
+    }
+}
+print("------------  2. ------------")
+print(["market", "maxima", "mama"].longestCommonPrefix())
+print(["sale", "safe", "sun"].longestCommonPrefix())
+print(["sale", "maxima", "noprefix"].longestCommonPrefix())
+print("-----------------------------")
+
+// ----------------------   3.  ----------------------
+func printLastWordLength(str: String) {
+    var strArray = str.components(separatedBy: " ")
+    print(strArray.last!.count)
+}
+
+print("------------  3. ------------")
+printLastWordLength(str: "Today is sunny")
+printLastWordLength(str: "What is this thing")
+printLastWordLength(str: "W w")
+printLastWordLength(str: "")
+print("-----------------------------")
+// ----------------------   4.  ----------------------
+
+// 1) way
+extension Array where Element: Hashable {
+    func removingDuplicates() -> [Element] {
+        var addedDict = [Element: Bool]()
+        
+        return filter {
+            addedDict.updateValue(true, forKey: $0) == nil
+        }
+    }
+    
+    mutating func removeDuplicates() {
+        self = self.removingDuplicates()
+    }
+}
+
+// 2) way
+func filterMyArray(_ arr: Array<Int>) -> Array<Int> {
+    var newArr = Array<Int>()
+    for val in arr {
+        if !newArr.contains(val) {
+            newArr.append(val)
+        }
+    }
+    return newArr
+}
+
+
+print("------------  4. ------------")
+print(filterMyArray([1,1,3,4,5,5]))
+var tempArr = [1,1,3,4,5,5,5,5,5]
+tempArr.removeDuplicates()
+print(tempArr)
+print("-----------------------------")
+
+// ----------------------   5.  ----------------------
+
+
+// ----------------------   6.  ----------------------
+
+
+// ----------------------   7.  ----------------------
+
+
+// ----------------------   8.  ----------------------
